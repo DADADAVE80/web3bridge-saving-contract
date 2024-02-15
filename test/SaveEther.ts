@@ -24,10 +24,11 @@ describe("Save Ether Contract", () => {
         it('Should take in a value before depositing', async () => {
             const {saveEther, owner} = await loadFixture(deploySaveEther);
 
-            const ownerBalance = await saveEther.checkSavings(owner.address);
+            await saveEther.deposit({value: 1});
+
+            const ownerSavings = await saveEther.checkSavings(owner.address);
             const deposit = saveEther.deposit;
-            expect(ownerBalance).to.equal((await deposit({value: 1})));
+            expect(ownerSavings).to.equal(1);
         });
     });
-        console.log(deploySaveEther());
 });
